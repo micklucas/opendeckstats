@@ -19,5 +19,6 @@ public class DeckNameMapping {
         deckNameMapping.put(new InputDeckIdentifier("ROTS - Maul", "D"), "RevengeOfTheSith");
         deckNameMapping.put(new InputDeckIdentifier("Senate", "L"), "PMCTTS");
         deckNameMapping.put(new InputDeckIdentifier("Watto", "D"), "NMNPND");
+        deckNameMapping.put(new InputDeckIdentifier("Walkers", "D"), "TSWBDIM");
     }
 }
