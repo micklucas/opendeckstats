@@ -1,9 +1,14 @@
 package net.oi.swccg.gemp.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameResults implements Serializable {
+
+    public GameResults() {
+        this.gameResults = new ArrayList<>();
+    }
 
     List<GameResult> gameResults;
 
