@@ -48,6 +48,9 @@ public class GameResultServiceHelper {
             throw new ProcessException(e);
         }
 
+        if (results == null)
+            results = new GameResults();
+
         return results;
     }
 
