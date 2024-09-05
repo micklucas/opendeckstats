@@ -20,5 +20,11 @@ public class DeckNameMapping {
         deckNameMapping.put(new InputDeckIdentifier("Senate", "L"), "PMCTTS");
         deckNameMapping.put(new InputDeckIdentifier("Watto", "D"), "NMNPND");
         deckNameMapping.put(new InputDeckIdentifier("Walkers", "D"), "TSWBDIM");
+        deckNameMapping.put(new InputDeckIdentifier("Hunt Down", "D"), "HDADTJ");
+        deckNameMapping.put(new InputDeckIdentifier("WHAP", "L"), "WHAP");
+        deckNameMapping.put(new InputDeckIdentifier("Skywalker Saga - Rey", "L"), "SkywalkerSaga");
+        deckNameMapping.put(new InputDeckIdentifier("MWYHL", "L"), "MWYHL");
+        deckNameMapping.put(new InputDeckIdentifier("RST", "L"), "RST");
+        deckNameMapping.put(new InputDeckIdentifier("Combat", "L"), "WHT");
     }
 }
