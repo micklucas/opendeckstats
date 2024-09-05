@@ -24,7 +24,6 @@ public class DeckNameMapping {
         deckNameMapping.put(new InputDeckIdentifier("WHAP", "L"), "WHAP");
         deckNameMapping.put(new InputDeckIdentifier("Skywalker Saga - Rey", "L"), "SkywalkerSaga");
         deckNameMapping.put(new InputDeckIdentifier("MWYHL", "L"), "MWYHL");
-        deckNameMapping.put(new InputDeckIdentifier("Communing - Yoda", "L"), "Communing");
         deckNameMapping.put(new InputDeckIdentifier("RST", "L"), "RST");
         deckNameMapping.put(new InputDeckIdentifier("Combat", "L"), "WHT");
     }
