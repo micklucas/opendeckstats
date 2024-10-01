@@ -41,7 +41,7 @@ public class GameResultValidator {
             else
             {
                 if (!EnumUtils.isValidEnum(Side.class, gameResult.getWinner().toString()))
-                    validationMessages.add("Value for Side must be either D or L.");
+                    validationMessages.add("Valid options for Side are " + EnumUtils.getEnumList(Side.class).toString());
 
                 if (gameResult.getDarkSidePlayer().equals(gameResult.getLightSidePlayer()))
                     validationMessages.add("Dark Side player and Light Side player may not be the same.");
