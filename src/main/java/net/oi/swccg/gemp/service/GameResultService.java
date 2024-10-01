@@ -25,6 +25,7 @@ public class GameResultService {
 
     private GameResultServiceHelper helper;
     private GameResultValidator validator;
+    private GameResults master;
 
     /**
      * Service method to import the game results to the master data
@@ -33,16 +34,17 @@ public class GameResultService {
      */
     public UploadResultsResponse loadGameResults(List<GameResult> gameResults) {
         Map<GameResult, List<String>> validatedInputResults;
-        GameResults master;
         Date today = Calendar.getInstance().getTime();
         Date thresholdDate = OpenDeckStatsUtil.adjustDate(today, -180);
         List<Record> darkSideDeckRecords = new ArrayList<>();
         List<Record> lightSideDeckRecords = new ArrayList<>();
+        List<Record> allDeckRecords = new ArrayList<>();
         UploadResultsResponse response = new UploadResultsResponse();
         Map<InputDeckIdentifier, String> deckMapping = DeckNameMapping.deckNameMapping;
 
         //load existing results from file
-        master = helper.inputToJsonObjectGameResults();
+        if (master == null)
+            master = helper.inputToJsonObjectGameResults();
 
         //validate input against updated master game result records
         validatedInputResults = validator.validateGameResultsRequest(gameResults, master, thresholdDate);
@@ -54,6 +56,8 @@ public class GameResultService {
         //aggregate and compile deck records
         helper.calculateDeckRecords(master.getGameResults(), darkSideDeckRecords, Side.D);
         helper.calculateDeckRecords(master.getGameResults(), lightSideDeckRecords, Side.L);
+        allDeckRecords.addAll(darkSideDeckRecords);
+        allDeckRecords.addAll(lightSideDeckRecords);
 
         //save new master results file
         helper.exportMasterToJsonFile(master);

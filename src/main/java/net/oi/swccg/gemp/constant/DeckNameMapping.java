@@ -26,5 +26,7 @@ public class DeckNameMapping {
         deckNameMapping.put(new InputDeckIdentifier("MWYHL", "L"), "MWYHL");
         deckNameMapping.put(new InputDeckIdentifier("RST", "L"), "RST");
         deckNameMapping.put(new InputDeckIdentifier("Combat", "L"), "WHT");
+        deckNameMapping.put(new InputDeckIdentifier("Invasion", "D"), "I");
+        deckNameMapping.put(new InputDeckIdentifier("Hoth CPv", "L"), "Hoth CPv");
     }
 }
