@@ -10,7 +10,7 @@ public class GameResults implements Serializable {
         this.gameResults = new ArrayList<>();
     }
 
-    List<GameResult> gameResults;
+    private List<GameResult> gameResults;
 
     public void setGameResults(List<GameResult> gameResults) {
         this.gameResults = gameResults;
