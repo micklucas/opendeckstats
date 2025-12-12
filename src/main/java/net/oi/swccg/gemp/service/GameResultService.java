@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Component;
 import net.oi.swccg.gemp.constant.DeckNameMapping;
+import net.oi.swccg.gemp.dto.DeckRankingsResponse;
 import net.oi.swccg.gemp.dto.InputDeckIdentifier;
 import net.oi.swccg.gemp.dto.UploadResultsResponse;
 import net.oi.swccg.gemp.entity.GameResult;
@@ -26,6 +27,7 @@ public class GameResultService {
     private GameResultServiceHelper helper;
     private GameResultValidator validator;
     private GameResults master;
+    private List<Record> allDeckRecords;
 
     /**
      * Service method to import the game results to the master data
@@ -38,7 +40,6 @@ public class GameResultService {
         Date thresholdDate = OpenDeckStatsUtil.adjustDate(today, -180);
         List<Record> darkSideDeckRecords = new ArrayList<>();
         List<Record> lightSideDeckRecords = new ArrayList<>();
-        List<Record> allDeckRecords = new ArrayList<>();
         UploadResultsResponse response = new UploadResultsResponse();
         Map<InputDeckIdentifier, String> deckMapping = DeckNameMapping.deckNameMapping;
 
@@ -54,6 +55,9 @@ public class GameResultService {
         helper.addInputResultsToMaster(master, validatedInputResults);
 
         //aggregate and compile deck records
+        if (allDeckRecords == null)
+            allDeckRecords = new ArrayList<>();
+
         helper.calculateDeckRecords(master.getGameResults(), darkSideDeckRecords, Side.D);
         helper.calculateDeckRecords(master.getGameResults(), lightSideDeckRecords, Side.L);
         allDeckRecords.addAll(darkSideDeckRecords);
@@ -66,5 +70,33 @@ public class GameResultService {
         helper.buildUploadResultsResponse(validatedInputResults, master, response, deckMapping);
 
         return response;
+    }
+
+    /**
+     * Service method to calculate and return current deck rankings
+     * @return object containing ranked decks for each Side
+     */
+    public DeckRankingsResponse returnDeckRankings() {
+        DeckRankingsResponse deckRankings = new DeckRankingsResponse();
+        List<Record> darkSideDeckRecords = new ArrayList<>();
+        List<Record> lightSideDeckRecords = new ArrayList<>();
+
+        if (master == null)
+            master = helper.inputToJsonObjectGameResults();
+
+        //aggregate and compile deck records
+        if (allDeckRecords == null)
+            allDeckRecords = new ArrayList<>();
+
+        helper.calculateDeckRecords(master.getGameResults(), darkSideDeckRecords, Side.D);
+        helper.calculateDeckRecords(master.getGameResults(), lightSideDeckRecords, Side.L);
+        allDeckRecords.addAll(darkSideDeckRecords);
+        allDeckRecords.addAll(lightSideDeckRecords);
+        darkSideDeckRecords.sort(new RecordComparator());
+        lightSideDeckRecords.sort(new RecordComparator());
+        deckRankings.setDarkSide(darkSideDeckRecords);
+        deckRankings.setLightSide(lightSideDeckRecords);
+
+        return deckRankings;
     }
 }

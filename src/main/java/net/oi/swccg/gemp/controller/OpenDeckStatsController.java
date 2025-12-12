@@ -2,10 +2,12 @@ package net.oi.swccg.gemp.controller;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
+import net.oi.swccg.gemp.dto.DeckRankingsResponse;
 import net.oi.swccg.gemp.dto.UploadResultsResponse;
 import net.oi.swccg.gemp.entity.GameResult;
 import net.oi.swccg.gemp.service.GameResultService;
@@ -26,5 +28,12 @@ public class OpenDeckStatsController {
         return ResponseEntity.ok(response);
     }
 
-    //@GetMapping(path="/deckrankings")
+    @GetMapping(path="/deckrankings")
+    public ResponseEntity<Object> deckRankings() {
+        DeckRankingsResponse response;
+        
+        response = service.returnDeckRankings();
+        
+        return ResponseEntity.ok(response);
+    }
 }

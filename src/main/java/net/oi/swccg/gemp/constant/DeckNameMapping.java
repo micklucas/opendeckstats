@@ -35,5 +35,17 @@ public class DeckNameMapping {
         deckNameMapping.put(new InputDeckIdentifier("Senate", "D"), "MLITL");
         deckNameMapping.put(new InputDeckIdentifier("Starkiller Base CRv", "D"), "Starkiller Base CRv");
         deckNameMapping.put(new InputDeckIdentifier("Hoth: Main Power Generators (1st Marker) LTWWv", "L"), "Hoth: Main Power Generators (1st Marker) LTWWv");
+        deckNameMapping.put(new InputDeckIdentifier("MBO", "L"), "MBO");
+        deckNameMapping.put(new InputDeckIdentifier("Mustafar CRv", "D"), "Mustafar CRv");
+        deckNameMapping.put(new InputDeckIdentifier("Executor: Control Station v", "D"), "Executor: Control Station v");
+        deckNameMapping.put(new InputDeckIdentifier("Tatooine CPv", "L"), "Tatooine CPv");
+        deckNameMapping.put(new InputDeckIdentifier("TRM", "L"), "Yavin 4: Massassi Throne Room");
+        deckNameMapping.put(new InputDeckIdentifier("Map", "D"), "IWTM");
+        deckNameMapping.put(new InputDeckIdentifier("Court", "D"), "COTVG");
+        deckNameMapping.put(new InputDeckIdentifier("Legend", "L"), "TGMNAL");
+        deckNameMapping.put(new InputDeckIdentifier("MWYHL v", "L"), "MWYHLv");
+        deckNameMapping.put(new InputDeckIdentifier("Shadow Collective", "D"), "SC");
+        deckNameMapping.put(new InputDeckIdentifier("Old Allies", "L"), "OA");
+        deckNameMapping.put(new InputDeckIdentifier("Hidden Path", "L"), "THP");
     }
 }
