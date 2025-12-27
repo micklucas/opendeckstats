@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
@@ -209,5 +211,46 @@ public class GameResultServiceHelper {
         masterDeckIdentifiers.addAll(master.getGameResults().stream().map(r -> new InputDeckIdentifier(r.getDarkSideArchetype(), "D")).distinct().collect(Collectors.toList()));
         masterDeckIdentifiers.addAll(master.getGameResults().stream().map(r -> new InputDeckIdentifier(r.getLightSideArchetype(), "L")).distinct().collect(Collectors.toList()));
         response.setUnresolvedInputDeckNames(masterDeckIdentifiers.stream().filter(d -> !deckMapping.keySet().contains(d)).collect(Collectors.toList()));
+    }
+
+    /**
+     * Build and append rankings data report for a set (side) of decks
+     * @param report the string report object to build and append to
+     * @param decks collection of decks to rank
+     * @return string object of the formatted report of deck rankings
+     */
+    public String buildDeckRankingsReport(String report, List<Record> decks) {
+        int rank = 0;
+        int previousRank = 0;
+        RecordComparator comparator = new RecordComparator();
+        Record previousDeck = null;
+
+        for (Record record : decks)
+        {
+            report = report + "\n";
+
+            if (rank == 0)
+            {
+                report = report + StringUtils.leftPad("1", 4) + "   ";
+                previousRank++;
+                rank++;
+            }
+            else
+            {
+                if (comparator.compare(record, previousDeck) == 0)
+                    report = report + StringUtils.leftPad(Integer.toString(previousRank), 4) + "   ";
+                else
+                {
+                    report= report + StringUtils.leftPad(Integer.toString(rank), 4) + "   ";
+                    previousRank = rank;
+                }
+            }
+
+            report = report + record.reportString();
+            previousDeck = record;
+            rank++;
+        }
+
+        return report;
     }
 }

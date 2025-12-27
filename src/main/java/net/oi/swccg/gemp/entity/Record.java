@@ -1,6 +1,7 @@
 package net.oi.swccg.gemp.entity;
 
 import java.io.Serializable;
+import org.apache.commons.lang3.StringUtils;
 
 public class Record implements Serializable {
 
@@ -123,5 +124,10 @@ public class Record implements Serializable {
     public String toString() {
         return "Record [deck=" + deck + ", totalGames=" + totalGames + ", wins=" + wins + ", losses=" + losses
                 + ", differential=" + differential + "]";
+    }
+
+    public String reportString() {
+        return StringUtils.rightPad(deck, 36) + "     " + StringUtils.leftPad(Integer.toString(differential), 4) + StringUtils.leftPad(Integer.toString(totalGames), 7) 
+                + StringUtils.leftPad(Integer.toString(wins), 6) + StringUtils.leftPad(Integer.toString(losses), 6);
     }
 }
