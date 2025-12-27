@@ -36,4 +36,11 @@ public class OpenDeckStatsController {
         
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping(path="/deckrankings/report")
+    public ResponseEntity<Object> deckRankingsReport() {
+        String response = service.returnDeckRankingsReport();
+        
+        return ResponseEntity.ok(response);
+    }
 }

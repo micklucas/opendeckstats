@@ -99,4 +99,31 @@ public class GameResultService {
 
         return deckRankings;
     }
+
+    /**
+     * Service method to calculate and return current deck rankings in a nicely formatted report form
+     * @return string object of the formatted report of deck rankings
+     */
+    public String returnDeckRankingsReport() {
+        String report = "";
+        DeckRankingsResponse rankings = returnDeckRankings();
+        List<Record> darkSideDecks = rankings.getDarkSide();
+        List<Record> lightSideDecks = rankings.getLightSide();
+
+        report = "DARK" + 
+               "\n-------------------------------------------------------------------------" + 
+               "\nRank   Deck                                     Diff  Total   Win  Loss" + 
+               "\n-------------------------------------------------------------------------";
+
+        report = helper.buildDeckRankingsReport(report, darkSideDecks);
+
+        report = report + "\n\nLIGHT" + 
+               "\n-------------------------------------------------------------------------" + 
+               "\nRank   Deck                                     Diff  Total   Win  Loss" + 
+               "\n-------------------------------------------------------------------------";
+
+        report = helper.buildDeckRankingsReport(report, lightSideDecks);
+
+        return report;
+    }
 }
