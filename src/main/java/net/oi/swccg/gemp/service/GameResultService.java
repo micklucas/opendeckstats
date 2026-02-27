@@ -80,9 +80,16 @@ public class GameResultService {
         DeckRankingsResponse deckRankings = new DeckRankingsResponse();
         List<Record> darkSideDeckRecords = new ArrayList<>();
         List<Record> lightSideDeckRecords = new ArrayList<>();
+        Map<InputDeckIdentifier, String> deckMapping = DeckNameMapping.deckNameMapping;
+        Date today = Calendar.getInstance().getTime();
+        Date thresholdDate = OpenDeckStatsUtil.adjustDate(today, -180);
 
         if (master == null)
             master = helper.inputToJsonObjectGameResults();
+
+        //update master deck result data (purge old results, update deck names/identifiers)
+        helper.updateExistingMasterResults(master, thresholdDate, deckMapping);
+        helper.exportMasterToJsonFile(master);
 
         //aggregate and compile deck records
         if (allDeckRecords == null)
